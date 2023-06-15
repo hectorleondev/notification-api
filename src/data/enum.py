@@ -15,5 +15,5 @@ class NotificationTypes(Enum):
 
 @unique
 class ErrorMessage(Enum):
-    SUBSCRIPTION_ERROR = "There are not subscription for that category"
+    SUBSCRIPTION_ERROR = "There are not subscriptions for that category"
     NOT_FOUND_CATEGORY = "Category not found"
