@@ -17,7 +17,6 @@ class ResponseService:
         """
         def wrap(*args, **kwargs):
             conf_service = ConfigService()
-            kwargs["conf_svc"] = conf_service
             logger = Logger(service=conf_service.LOGGER_SERVICE_NAME)
             kwargs["logger"] = logger
 

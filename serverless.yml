@@ -44,6 +44,12 @@ functions:
       - httpApi:
           path: /notification
           method: post
+  get_log_list:
+    handler: src.handlers.log_handler.get_log_list_handler
+    events:
+      - httpApi:
+          path: /log/list
+          method: get
 resources:
   Resources:
     UserTable:

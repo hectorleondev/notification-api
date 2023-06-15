@@ -53,3 +53,7 @@ def save_log(log_id: str, user_id: str, category_id: str, notification_type: str
     log.notification_type = notification_type
     log.message = message
     log.save()
+
+
+def get_logs():
+    return list(LogModel.scan())

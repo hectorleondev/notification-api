@@ -6,7 +6,6 @@ from aws_lambda_powertools import Logger
 from src.data.data_type import NotificationInputData
 from src.data.exceptions import BadRequestException
 from src.data.model.user import UserModel
-from src.services.config import ConfigService
 from src.services.db import get_all_user_by_category_id, save_log, get_category
 from src.data.enum import SchemaNames, NotificationTypes, ErrorMessage
 from src.services.util import get_random_id
@@ -14,8 +13,7 @@ from src.services.validation import validate_event
 
 
 class NotificationController:
-    def __init__(self, _conf_svc: ConfigService, _event: Any, _logger: Logger):
-        self.conf_svc = _conf_svc
+    def __init__(self,  _event: Any, _logger: Logger):
         self.logger = _logger
         self.event = _event
 
