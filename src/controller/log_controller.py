@@ -30,7 +30,7 @@ class LogController:
                 "category": categories[item.category_id].name,
                 "channel": item.notification_type,
                 "message": item.message,
-                "create_at": item.createdAt.strftime('%m/%d/%Y')
+                "create_at": item.createdAt.strftime('%m/%d/%Y %H:%M')
             })
 
         return {"logs": response}
