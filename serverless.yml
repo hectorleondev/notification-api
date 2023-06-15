@@ -1,14 +1,83 @@
 service: notification-api
 frameworkVersion: '3'
 
+plugins:
+  - serverless-python-requirements
+
 provider:
   name: aws
   runtime: python3.9
-
+  region: us-east-1
+  stage: dev
+  environment:
+    USER_TABLE:
+      Ref: UserTable
+    CATEGORY_TABLE:
+      Ref: CategoryTable
+    USER_CATEGORY_TABLE:
+      Ref: UserCategoryTable
+    LOGGER_SERVICE_NAME: ${self:service}-logger
+    REGION: ${self:provider.region}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:DescribeTable
+          Resource: "*"
 functions:
   hello:
-    handler: src.handler.hello
+    handler: src.handlers.handler.hello
     events:
       - httpApi:
           path: /
           method: get
+resources:
+  Resources:
+    UserTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: user_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: user_id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    CategoryTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: category_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: category_id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    UserCategoryTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: category_id
+            AttributeType: S
+          - AttributeName: user_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: category_id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        GlobalSecondaryIndexes:
+          - IndexName: user_index
+            KeySchema:
+              - AttributeName: user_id
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
