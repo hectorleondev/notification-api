@@ -1,5 +1,6 @@
-from src.data.model import CategoryModel
-from src.data.model import UserModel
+from src.data.model.category import CategoryModel
+from src.data.model.log import LogModel
+from src.data.model.user import UserModel
 
 
 def get_categories():
@@ -33,3 +34,11 @@ def get_user(user_id: str):
     return UserModel.get(user_id)
 
 
+def save_log(log_id: str, user_id: str, category_id: str, notification_type: str, message):
+    log = LogModel()
+    log.log_id = log_id
+    log.user_id = user_id
+    log.category_id = category_id
+    log.notification_type = notification_type
+    log.message = message
+    log.save()
