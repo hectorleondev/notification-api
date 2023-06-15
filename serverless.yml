@@ -30,11 +30,11 @@ provider:
             - dynamodb:DescribeTable
           Resource: "*"
 functions:
-  hello:
-    handler: src.handlers.handler.hello
+  get_category_list:
+    handler: src.handlers.category_handler.get_category_list_handler
     events:
       - httpApi:
-          path: /
+          path: /category/list
           method: get
 resources:
   Resources:
