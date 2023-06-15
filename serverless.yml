@@ -14,8 +14,6 @@ provider:
       Ref: UserTable
     CATEGORY_TABLE:
       Ref: CategoryTable
-    USER_CATEGORY_TABLE:
-      Ref: UserCategoryTable
     LOGGER_SERVICE_NAME: ${self:service}-logger
     REGION: ${self:provider.region}
   iam:
@@ -61,23 +59,3 @@ resources:
           - AttributeName: category_id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
-
-    UserCategoryTable:
-      Type: 'AWS::DynamoDB::Table'
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: category_id
-            AttributeType: S
-          - AttributeName: user_id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: category_id
-            KeyType: HASH
-        BillingMode: PAY_PER_REQUEST
-        GlobalSecondaryIndexes:
-          - IndexName: user_index
-            KeySchema:
-              - AttributeName: user_id
-                KeyType: HASH
-            Projection:
-              ProjectionType: ALL
