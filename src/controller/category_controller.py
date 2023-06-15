@@ -11,7 +11,6 @@ class CategoryController:
         self.event = _event
 
     def get_category_list(self):
-        self.logger.info({"message": "Event information", "event_info": self.event})
 
         categories = get_categories()
 

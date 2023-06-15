@@ -11,8 +11,6 @@ class LogController:
         self.event = _event
 
     def get_log_list(self):
-        self.logger.info({"message": "Event information", "event_info": self.event})
-
         response = []
         logs = get_logs()
         users = {}
@@ -31,7 +29,8 @@ class LogController:
                 "email": users[item.user_id].email,
                 "category": categories[item.category_id].name,
                 "channel": item.notification_type,
-                "message": item.message
+                "message": item.message,
+                "create_at": item.createdAt.strftime('%m/%d/%Y')
             })
 
         return {"logs": response}

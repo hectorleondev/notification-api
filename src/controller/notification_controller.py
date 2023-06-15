@@ -18,8 +18,6 @@ class NotificationController:
         self.event = _event
 
     def create_notification(self):
-        self.logger.info({"message": "Event information", "event_info": self.event})
-
         body = json.loads(self.event.get("body", {}))
 
         validate_event(body, SchemaNames.CREATE_NOTIFICATION.value)
