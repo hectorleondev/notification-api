@@ -15,14 +15,21 @@ class LogController:
 
         response = []
         logs = get_logs()
+        users = {}
+        categories = {}
+
         for item in logs:
-            user = get_user(item.user_id)
-            category = get_category(item.category_id)
+            if item.user_id not in users:
+                users[item.user_id] = get_user(item.user_id)
+
+            if item.category_id not in categories:
+                categories[item.category_id] = get_category(item.category_id)
+
             response.append({
                 "id": item.log_id,
-                "user_name": user.name,
-                "email": user.email,
-                "category": category.name,
+                "user_name": users[item.user_id].name,
+                "email": users[item.user_id].email,
+                "category": categories[item.category_id].name,
                 "channel": item.notification_type,
                 "message": item.message
             })
