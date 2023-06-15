@@ -1,5 +1,5 @@
-from src.data.model.category import CategoryModel
-from src.data.model.user import UserModel
+from src.data.model import CategoryModel
+from src.data.model import UserModel
 
 
 def get_categories():
@@ -22,3 +22,14 @@ def get_all_user_by_category_id(category_id: str):
     :return:
     """
     return list(UserModel.scan(filter_condition=UserModel.categories.contains(category_id)))
+
+
+def get_user(user_id: str):
+    """
+    Get user by ID
+    :param user_id:
+    :return:
+    """
+    return UserModel.get(user_id)
+
+
