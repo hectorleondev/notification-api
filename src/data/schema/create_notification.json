@@ -4,7 +4,7 @@
    "type":"object",
    "properties":{
       "category_id":{"type":"string"},
-      "message":{"type":"string", "minLength":  4}
+      "message":{"type":"string", "minLength":  1}
    },
    "required":[
       "category_id",

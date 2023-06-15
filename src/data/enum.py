@@ -12,3 +12,8 @@ class NotificationTypes(Enum):
     sms = "SMS"
     push_notification = "Push Notification"
 
+
+@unique
+class ErrorMessage(Enum):
+    SUBSCRIPTION_ERROR = "There are not subscription for that category"
+    NOT_FOUND_CATEGORY = "Category not found"

@@ -4,9 +4,10 @@ from typing import Any
 from aws_lambda_powertools import Logger
 
 from src.data.data_type import NotificationInputData
+from src.data.exceptions import BadRequestException
 from src.services.config import ConfigService
-from src.services.db import get_all_user_by_category_id, save_log
-from src.data.enum import SchemaNames, NotificationTypes
+from src.services.db import get_all_user_by_category_id, save_log, get_category
+from src.data.enum import SchemaNames, NotificationTypes, ErrorMessage
 from src.services.util import get_random_id
 from src.services.validation import validate_event
 
@@ -26,7 +27,13 @@ class NotificationController:
 
         fields = NotificationInputData.from_dict(body)
 
+        if get_category(fields.category_id):
+            raise BadRequestException(ErrorMessage.NOT_FOUND_CATEGORY.value)
+
         users = get_all_user_by_category_id(fields.category_id)
+
+        if not users:
+            raise BadRequestException(ErrorMessage.SUBSCRIPTION_ERROR.value)
 
         for user in users:
             notification_types = user.notification_types

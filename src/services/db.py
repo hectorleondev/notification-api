@@ -31,7 +31,18 @@ def get_user(user_id: str):
     :param user_id:
     :return:
     """
-    return UserModel.get(user_id)
+    try:
+        return UserModel.get(user_id)
+    except UserModel.DoesNotExist:
+        return None
+
+
+def get_category(category_id: str):
+
+    try:
+        return CategoryModel.get(category_id)
+    except CategoryModel.DoesNotExist:
+        return None
 
 
 def save_log(log_id: str, user_id: str, category_id: str, notification_type: str, message):
