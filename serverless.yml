@@ -38,6 +38,12 @@ functions:
       - httpApi:
           path: /category/list
           method: get
+  create_notification:
+    handler: src.handlers.notification_handler.create_notification_handler
+    events:
+      - httpApi:
+          path: /notification
+          method: post
 resources:
   Resources:
     UserTable:
