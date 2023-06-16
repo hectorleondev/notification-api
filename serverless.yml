@@ -38,18 +38,21 @@ functions:
       - httpApi:
           path: /category/list
           method: get
+          cors: true
   create_notification:
     handler: src.handlers.notification_handler.create_notification_handler
     events:
       - httpApi:
           path: /notification
           method: post
+          cors: true
   get_log_list:
     handler: src.handlers.log_handler.get_log_list_handler
     events:
       - httpApi:
           path: /log/list
           method: get
+          cors: true
 resources:
   Resources:
     UserTable:
