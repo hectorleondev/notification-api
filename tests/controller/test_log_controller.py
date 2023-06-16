@@ -40,7 +40,7 @@ class TestLogController:
                     "category": "category one",
                     "channel": "movie",
                     "message": "hello",
-                    "create_at": "01/01/2000 00:00"
+                    "create_at": "2000-01-01 00:00"
                 },
                 {
                     "log_id": "l002",
@@ -51,7 +51,7 @@ class TestLogController:
                     "category": "category one",
                     "channel": "finance",
                     "message": "again",
-                    "create_at": "01/01/2000 00:00"
+                    "create_at": "2000-01-01 00:00"
                 }
             ]
         }
