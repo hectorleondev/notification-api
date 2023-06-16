@@ -24,9 +24,11 @@ class LogController:
                 categories[item.category_id] = get_category(item.category_id)
 
             response.append({
-                "id": item.log_id,
+                "log_id": item.log_id,
+                "user_id": item.user_id,
                 "user_name": users[item.user_id].name,
                 "email": users[item.user_id].email,
+                "phone_number": users[item.user_id].phone_number,
                 "category": categories[item.category_id].name,
                 "channel": item.notification_type,
                 "message": item.message,

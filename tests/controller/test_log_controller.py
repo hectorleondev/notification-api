@@ -9,10 +9,11 @@ class TestCategoryModel:
 
 
 class TestUserModel:
-    def __init__(self, user_id, name, email):
+    def __init__(self, user_id, name, email, phone_number):
         self.user_id = user_id
         self.name = name
         self.email = email
+        self.phone_number = phone_number
 
 
 class TestLogModel:
@@ -31,18 +32,22 @@ class TestLogController:
         expected = {
             "logs": [
                 {
-                    "id": "l001",
+                    "log_id": "l001",
+                    "user_id": "u001",
                     "user_name": "one",
                     "email": "u001@test.co",
+                    "phone_number": "111",
                     "category": "category one",
                     "channel": "movie",
                     "message": "hello",
                     "create_at": "01/01/2000 00:00"
                 },
                 {
-                    "id": "l002",
+                    "log_id": "l002",
+                    "user_id": "u001",
                     "user_name": "one",
                     "email": "u001@test.co",
+                    "phone_number": "111",
                     "category": "category one",
                     "channel": "finance",
                     "message": "again",
@@ -63,7 +68,7 @@ class TestLogController:
         log_controller.get_category.return_value = TestCategoryModel("c001", "category one")
 
         mocker.patch.object(log_controller, 'get_user')
-        log_controller.get_user.return_value = TestUserModel("u001", "one", "u001@test.co")
+        log_controller.get_user.return_value = TestUserModel("u001", "one", "u001@test.co", "111")
 
         log = log_controller.LogController({}, None)
         response = log.get_log_list()
