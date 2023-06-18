@@ -40,11 +40,11 @@ functions:
       - httpApi:
           path: /category/list
           method: get
-  notification-subscribes:
+  notification-subscribers:
     handler: src.handlers.notification_handler.create_notification_handler
     events:
       - httpApi:
-          path: /notification-subscribes
+          path: /notification/subscribers
           method: post
   get_log_list:
     handler: src.handlers.log_handler.get_log_list_handler
