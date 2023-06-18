@@ -24,7 +24,8 @@ class NotificationController:
 
         fields = NotificationInputData.from_dict(body)
 
-        if get_category(fields.category_id) is None:
+        category = get_category(fields.category_id)
+        if category is None:
             raise BadRequestException(ErrorMessage.NOT_FOUND_CATEGORY.value)
 
         users = get_all_user_by_category_id(fields.category_id)
@@ -38,8 +39,8 @@ class NotificationController:
                 self.process_notification(item, user)
 
                 save_log(log_id=get_random_id(),
-                                  user_id=user.user_id,
-                                  category_id=fields.category_id,
+                                  user=user,
+                                  category=category,
                                   notification_type=item,
                                   message=fields.message)
 

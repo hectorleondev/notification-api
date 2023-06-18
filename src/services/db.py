@@ -45,11 +45,15 @@ def get_category(category_id: str):
         return None
 
 
-def save_log(log_id: str, user_id: str, category_id: str, notification_type: str, message):
+def save_log(log_id: str, user: UserModel, category: CategoryModel, notification_type: str, message):
     log = LogModel()
     log.log_id = log_id
-    log.user_id = user_id
-    log.category_id = category_id
+    log.user_id = user.user_id
+    log.user_name = user.name
+    log.email = user.email
+    log.phone_number = user.phone_number
+    log.category_id = category.category_id
+    log.category_name = category.name
     log.notification_type = notification_type
     log.message = message
     log.save()
