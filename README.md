@@ -105,6 +105,33 @@ Response
 }
 ```
 
+### Create notification subscribers
+
+```bash
+curl --location 'https://7hbsmqn32h.execute-api.us-east-1.amazonaws.com/notification/subscribers' \
+--header 'Content-Type: application/json' \
+--data '{
+    "category_id": "C003",
+    "message": "Hey Hector"
+}'
+
+Response
+{
+    "logs": [
+        {
+            "id": "b351b655-0e5e-4106-8c9b-6adb5d38f012",
+            "user_name": "one",
+            "email": "user_one@test.com",
+            "category": "Movies",
+            "channel": "SMS",
+            "message": "Hello World!",
+            "create_at": "06/15/2023"
+        }
+    ]
+}
+```
+
+
 ## Unit test
 ```bash
 Run the following command in root path
